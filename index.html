@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMarket IA - Marketplace Local</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">EduMarket IA</div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('home')">Inicio</a></li>
+                    <li><a href="#" onclick="showPage('catalog')">Catálogo</a></li>
+                    <li><a href="#" onclick="showPage('sell')">Vender</a></li>
+                    <li><a href="#" onclick="showPage('ai-advisor')">Asesoría IA</a></li>
+                    <li><a href="#" onclick="showPage('advertising')">Publicidad</a></li>
+                    <li><a href="#" onclick="showPage('admin')">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Página de Inicio -->
+            <div id="home" class="page active">
+                <section class="hero">
+                    <h1>EduMarket IA</h1>
+                    <p>Vende directo + IA que te asesora</p>
+                    <p>Conectamos productores locales con consumidores usando inteligencia artificial</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary" onclick="showPage('catalog')">Comprar</a>
+                        <a href="#" class="btn btn-secondary" onclick="showPage('sell')">Vender</a>
+                    </div>
+                </section>
+
+                <section class="benefits">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📝</div>
+                        <h3>Publica fácil</h3>
+                        <p>Registra tu producto en 3 minutos con nuestro formulario intuitivo</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🤖</div>
+                        <h3>Aprende con IA</h3>
+                        <p>Recibe asesoría personalizada para precios, descripciones y estrategias</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📢</div>
+                        <h3>Promociona en 1 clic</h3>
+                        <p>Genera publicidad automática para redes sociales y medios impresos</p>
+                    </div>
+                </section>
+
+                <section class="testimonials">
+                    <h3>Lo que dicen nuestros usuarios</h3>
+                    <div class="testimonial">
+                        "Gracias a EduMarket IA pude vender mis productos agrícolas directamente a los consumidores" - María S.
+                    </div>
+                    <div class="testimonial">
+                        "La asesoría de IA me ayudó a fijar precios justos para mis artesanías" - Carlos R.
+                    </div>
+                </section>
+            </div>
+
+            <!-- Página de Catálogo -->
+            <div id="catalog" class="page">
+                <h2>Catálogo de Productos</h2>
+                
+                <div class="filters">
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="">Todas las categorías</option>
+                        <option value="agro">Agro</option>
+                        <option value="artesania">Artesanía</option>
+                        <option value="gastronomia">Gastronomía</option>
+                        <option value="servicios">Servicios</option>
+                    </select>
+                    
+                    <select class="filter-select" id="priceFilter">
+                        <option value="">Cualquier precio</option>
+                        <option value="0-10">S/ 0 - 10</option>
+                        <option value="10-50">S/ 10 - 50</option>
+                        <option value="50-100">S/ 50 - 100</option>
+                        <option value="100+">S/ 100+</option>
+                    </select>
+                    
+                    <select class="filter-select" id="availabilityFilter">
+                        <option value="">Disponibilidad</option>
+                        <option value="today">Disponible hoy</option>
+                        <option value="week">Esta semana</option>
+                    </select>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Los productos se cargan dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Página de Producto Individual -->
+            <div id="product-detail" class="page">
+                <div class="product-detail" id="productDetailContent">
+                    <!-- El contenido se carga dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Página para Vender -->
+            <div id="sell" class="page">
+                <h2>Registra tu Producto</h2>
+                <div class="form-container">
+                    <div class="success-message" id="sellSuccess">
+                        ¡Listo! Recibimos tu registro. En breve te ayudamos a publicar.
+                    </div>
+                    
+                    <form id="sellerForm">
+                        <div class="form-group">
+                            <label for="sellerName">Nombre completo *</label>
+                            <input type="text" id="sellerName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sellerWhatsApp">WhatsApp *</label>
+                            <input type="tel" id="sellerWhatsApp" placeholder="51999999999" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sellerEmail">Email</label>
+                            <input type="email" id="sellerEmail">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sellerDistrict">Distrito/Comunidad *</label>
+                            <input type="text" id="sellerDistrict" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productCategory">Categoría del producto *</label>
+                            <select id="productCategory" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="agro">Agro</option>
+                                <option value="artesania">Artesanía</option>
+                                <option value="gastronomia">Gastronomía</option>
+                                <option value="servicios">Servicios</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productName">Nombre del producto *</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productDescription">Descripción *</label>
+                            <textarea id="productDescription" placeholder="Describe tu producto: origen, calidad, características especiales..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productPrice">Precio sugerido *</label>
+                            <input type="number" id="productPrice" placeholder="0.00" step="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productUnit">Unidad *</label>
+                            <select id="productUnit" required>
+                                <option value="">Selecciona unidad</option>
+                                <option value="kg">Kilogramo</option>
+                                <option value="unidad">Unidad</option>
+                                <option value="docena">Docena</option>
+                                <option value="litro">Litro</option>
+                                <option value="servicio">Servicio</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productStock">Stock disponible</label>
+                            <input type="number" id="productStock" placeholder="0">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Registrar Producto</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Página de Asesoría IA -->
+            <div id="ai-advisor" class="page">
+                <h2>Asesoría Virtual IA</h2>
+                
+                <div class="quick-prompts">
+                    <div class="quick-prompt" onclick="sendQuickPrompt('precio')">Sugiere precio</div>
+                    <div class="quick-prompt" onclick="sendQuickPrompt('descripcion')">Escribe descripción</div>
+                    <div class="quick-prompt" onclick="sendQuickPrompt('posts')">Dame 3 ideas de post</div>
+                    <div class="quick-prompt" onclick="sendQuickPrompt('competencia')">Analiza competencia</div>
+                    <div class="quick-prompt" onclick="sendQuickPrompt('estrategia')">Estrategia de ventas</div>
+                </div>
+                
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">
+                            <strong>Asesor IA:</strong> ¡Hola! Soy tu asesor comercial virtual. Puedo ayudarte con precios, descripciones de productos, estrategias de marketing y más. ¿En qué te puedo ayudar hoy?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Escribe tu consulta aquí...">
+                        <button class="btn btn-primary" onclick="sendMessage()">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Página de Publicidad -->
+            <div id="advertising" class="page">
+                <h2>Publicidad Automática</h2>
+                
+                <div class="benefits">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📱</div>
+                        <h3>Redes Sociales</h3>
+                        <p>Posts optimizados para Facebook, Instagram y TikTok</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🖼️</div>
+                        <h3>Material Impreso</h3>
+                        <p>Flyers, afiches y volantes listos para imprimir</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎥</div>
+                        <h3>Videos Promocionales</h3>
+                        <p>Clips cortos y atractivos para tus productos</p>
+                    </div>
+                </div>
+                
+                <div class="form-container">
+                    <h3>Solicitar Publicidad Personalizada</h3>
+                    <div class="success-message" id="adSuccess">
+                        ¡Solicitud recibida! Generaremos tu publicidad en las próximas 24 horas.
+                    </div>
+                    
+                    <form id="advertisingForm">
+                        <div class="form-group">
+                            <label for="adProduct">Producto a promocionar *</label>
+                            <input type="text" id="adProduct" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adFormat">Formato *</label>
+                            <select id="adFormat" required>
+                                <option value="">Selecciona formato</option>
+                                <option value="cuadrado">Cuadrado (1:1) - Instagram/Facebook</option>
+                                <option value="historia">Historia (9:16) - Instagram/Facebook Stories</option>
+                                <option value="a4">A4 - Material impreso</option>
+                                <option value="video">Video corto - TikTok/Reels</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adTitle">Título/Mensaje principal</label>
+                            <input type="text" id="adTitle" placeholder="Ej: ¡Frutas frescas de la chacra!">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adColors">Colores preferidos</label>
+                            <input type="text" id="adColors" placeholder="Ej: Verde, amarillo, natural">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adChannel">Canal principal *</label>
+                            <select id="adChannel" required>
+                                <option value="">Selecciona canal</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="impreso">Material impreso</option>
+                                <option value="whatsapp">WhatsApp Business</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Solicitar Publicidad</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Página de Admin -->
+            <div id="admin" class="page">
+                <h2>Panel de Administración</h2>
+                
+                <div style="margin-bottom: 2rem;">
+                    <button class="btn btn-primary" onclick="showAdminSection('sellers')">Vendedores</button>
+                    <button class="btn btn-primary" onclick="showAdminSection('products')">Productos</button>
+                    <button class="btn btn-primary" onclick="showAdminSection('orders')">Pedidos</button>
+                    <button class="btn btn-primary" onclick="showAdminSection('ads')">Publicidad</button>
+                </div>
+
+                <div id="admin-sellers" class="admin-section">
+                    <h3>Gestión de Vendedores</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>WhatsApp</th>
+                                <th>Distrito</th>
+                                <th>Estado</th>
+                                <th>Fecha Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sellersTable">
+                            <tr>
+                                <td>001</td>
+                                <td>María González</td>
+                                <td>Agricultor</td>
+                                <td>51987654321</td>
+                                <td>Lampa Centro</td>
+                                <td><span class="status active">Activo</span></td>
+                                <td>2024-01-15</td>
+                                <td>
+                                    <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">Ver</button>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.8rem;">Editar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Carlos Mamani</td>
+                                <td>Artesano</td>
+                                <td>51912345678</td>
+                                <td>Vila Vila</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                                <td>2024-01-20</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.8rem;">Aprobar</button>
+                                    <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">Rechazar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="admin-products" class="admin-section" style="display: none;">
+                    <h3>Gestión de Productos</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Vendedor</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                                <th>Destacado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTable">
+                            <tr>
+                                <td>001</td>
+                                <td>Papas nativas</td>
+                                <td>María González</td>
+                                <td>Agro</td>
+                                <td>S/ 8.50/kg</td>
+                                <td><span class="status published">Publicado</span></td>
+                                <td>Sí</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.8rem;">Destacar</button>
+                                    <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">Ocultar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Tejidos alpaca</td>
+                                <td>Carlos Mamani</td>
+                                <td>Artesanía</td>
+                                <td>S/ 45.00/unidad</td>
+                                <td><span class="status pending">Borrador</span></td>
+                                <td>No</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.8rem;">Publicar</button>
+                                    <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="admin-orders" class="admin-section" style="display: none;">
+                    <h3>Gestión de Pedidos</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Comprador</th>
+                                <th>Teléfono</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTable">
+                            <tr>
+                                <td>001</td>
+                                <td>Papas nativas</td>
+                                <td>Ana Quispe</td>
+                                <td>51999888777</td>
+                                <td>3 kg</td>
+                                <td>S/ 25.50</td>
+                                <td><span class="status active">Interesado</span></td>
+                                <td>2024-01-22</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.8rem;">Contactar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Tejidos alpaca</td>
+                                <td>Luis Morales</td>
+                                <td>51888777666</td>
+                                <td>1 unidad</td>
+                                <td>S/ 45.00</td>
+                                <td><span class="status pending">Simulado</span></td>
+                                <td>2024-01-23</td>
+                                <td>
+                                    <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">Seguimiento</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="admin-ads" class="admin-section" style="display: none;">
+                    <h3>Gestión de Publicidad</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Formato</th>
+                                <th>Canal</th>
+                                <th>Estado</th>
+                                <th>Fecha Solicitud</th>
+                                <th>Fecha Entrega</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adsTable">
+                            <tr>
+                                <td>001</td>
+                                <td>Papas nativas</td>
+                                <td>Cuadrado</td>
+                                <td>Instagram</td>
+                                <td><span class="status published">Entregado</span></td>
+                                <td>2024-01-20</td>
+                                <td>2024-01-21</td>
+                                <td>
+                                    <button class="btn btn-primary" style="padding: 0.3rem 0.8rem;">Ver archivo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Tejidos alpaca</td>
+                                <td>A4</td>
+                                <td>Impreso</td>
+                                <td><span class="status pending">En proceso</span></td>
+                                <td>2024-01-23</td>
+                                <td>-</td>
+                                <td>
+                                    <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">Actualizar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Botón flotante de IA -->
+    <button class="ia-float-btn" onclick="showPage('ai-advisor')" title="Asesoría IA">
+        🤖
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
